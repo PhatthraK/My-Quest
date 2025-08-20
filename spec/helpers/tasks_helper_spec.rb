@@ -11,5 +11,7 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe TasksHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "helper is loaded" do
+    expect(helper).to be_a(TasksHelper)
+  end
 end

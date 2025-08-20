@@ -22,7 +22,7 @@ RSpec.describe "/tasks", type: :request do
   end
 
   describe "PATCH /update" do
-    let(:task) { create(:task) }
+    let!(:task) { Task.create!(description: "Old task", completed: false) }
     let(:new_attributes) {
       { description: "This is an updated task.", completed: true }
     }
@@ -36,7 +36,7 @@ RSpec.describe "/tasks", type: :request do
   end
 
   describe "DELETE /destroy" do
-    let!(:task) { create(:task) }
+    let!(:task) { Task.create!(description: "Delete me", completed: false) }
 
     it "destroys the requested task" do
       expect {
