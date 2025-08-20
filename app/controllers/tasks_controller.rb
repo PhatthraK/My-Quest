@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   protect_from_forgery with: :null_session
 
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(created_at: :desc)
     @task = Task.new
   end
 
@@ -12,7 +12,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to tasks_path
     else
-      @tasks = Task.all
+      @tasks = Task.all.order(created_at: :desc)
       render :index
     end
   end

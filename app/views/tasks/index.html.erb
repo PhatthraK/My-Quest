@@ -44,7 +44,7 @@
         <!-- Task List Section -->
         <div>
             <h3 class="text-2xl md:text-3xl font-semibold mb-6" style="text-align: center;">My Academy Quest List</h3>
-            
+            <%= turbo_frame_tag "tasks_new" do %>
             <!-- Input and Add Task Section -->
             <div class="flex space-x-2 mb-8">
                 <%= form_with(model: @task, url: tasks_path, method: :post, class: "flex w-full gap-2") do |form| %>
@@ -66,7 +66,7 @@
                           <%= form_with(model: task, url: task_path(task), method: :patch, data: { turbo_frame: "tasks_frame" }) do |form| %>
                             <%= form.check_box :completed, 
                                 class: "h-6 w-6 text-gray-900 bg-white border-2 border-gray-900 rounded-full cursor-pointer focus:ring-transparent", 
-                                onchange: "this.form.submit()" %>
+                                onchange: "this.form.requestSubmit()" %>
                           <% end %>
                           
                           <span class="text-lg font-medium text-gray-900 flex-grow break-all <%= 'line-through text-gray-500' if task.completed? %>">
@@ -75,11 +75,8 @@
                         </div>
 
                         <div class="flex space-x-2">
-                            <%= link_to edit_task_path(task), class: "p-2 rounded-full border-2 border-gray-900 hover:bg-yellow-200 transition-colors" do %>
-                              <i class="fa-solid fa-pen-to-square"></i>
-                            <% end %>
 
-                            <%= form_with(model: task, url: task_path(task), method: :delete, data: { turbo_confirm: 'Are you sure?', turbo_frame: "_top" }) do |form| %>
+                            <%= form_with(model: task, url: task_path(task), method: :delete) do |form| %>
                               <button type="submit" class="p-2 rounded-full border-2 border-gray-900 hover:bg-red-200 transition-colors">
                                 <i class="fa-solid fa-trash"></i>
                               </button>
@@ -87,6 +84,7 @@
                         </div>
                       </li>
                     <% end %>
+                    <% end%>
                 </ul>
             </div>
         </div>
