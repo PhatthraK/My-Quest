@@ -1,0 +1,21 @@
+<div class="max-w-2xl mx-auto p-8 bg-white rounded-xl shadow-lg border-4 border-gray-900 mt-12">
+  <h1 class="text-3xl font-bold mb-6">Edit Quest</h1>
+
+  <%= form_with(model: @task, url: task_path(@task), method: :patch) do |form| %>
+    <div class="mb-4">
+      <%= form.label :description, "Quest Description", class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.text_area :description, 
+          class: "w-full p-3 border-4 border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all", rows: 4 %>
+    </div>
+
+    <div class="mb-6 flex items-center">
+      <%= form.check_box :completed, class: "mr-2 h-6 w-6 text-gray-900 bg-white border-2 border-gray-900 rounded-full cursor-pointer focus:ring-transparent" %>
+      <%= form.label :completed, "Completed", class: "text-gray-700 font-bold" %>
+    </div>
+
+    <div class="flex justify-end space-x-4">
+      <%= link_to "Cancel", tasks_path, class: "px-6 py-3 border-2 border-gray-900 text-gray-900 font-bold rounded-full hover:bg-gray-200 transition-colors duration-200" %>
+      <%= form.submit "Update Quest", class: "px-6 py-3 bg-gray-900 text-white font-bold rounded-full hover:bg-gray-700 transition-colors duration-200 cursor-pointer" %>
+    </div>
+  <% end %>
+</div>

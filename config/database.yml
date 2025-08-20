@@ -1,0 +1,35 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: phatthrakitpayuck # Change this line
+  password: # Add your password here if you have one
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: rails_academy_checklist_development
+
+test:
+  <<: *default
+  database: rails_academy_checklist_test
+
+production:
+  primary: &primary_production
+    <<: *default
+    database: rails_academy_checklist_production
+    username: rails_academy_checklist
+    password: <%= ENV["RAILS_ACADEMY_CHECKLIST_DATABASE_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: rails_academy_checklist_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: rails_academy_checklist_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: rails_academy_checklist_production_cable
+    migrations_paths: db/cable_migrate
