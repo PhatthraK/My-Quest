@@ -2,18 +2,18 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: phatthrakitpayuck # Change this line
-  password: # Add your password here if you have one
-  host: localhost
-  port: 5432
+  host: <%= ENV.fetch("DB_HOST", "localhost") %>
+  port: <%= ENV.fetch("DB_PORT", 5432) %>
+  username: <%= ENV.fetch("DB_USERNAME", "postgres") %>
+  password: <%= ENV["DB_PASSWORD"] %>
 
 development:
   <<: *default
-  database: rails_academy_checklist_development
+  database: <%= ENV.fetch("DB_NAME", "rails_academy_checklist_development") %>
 
 test:
   <<: *default
-  database: rails_academy_checklist_test
+  database: <%= ENV.fetch("DB_TEST_NAME", "rails_academy_checklist_test") %>
 
 production:
   primary: &primary_production
